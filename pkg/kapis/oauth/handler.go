@@ -684,3 +684,31 @@ func (h *handler) loginByIdentityProvider(req *restful.Request, response *restfu
 
 	h.passwordGrant(idp, username, password, req, response)
 }
+
+func (h *handler) loginBySso(req *restful.Request, response *restful.Response) {
+	username := req.QueryParameter("username")
+	password := req.QueryParameter("password")
+	redirectUri := req.QueryParameter("redirect_uri")
+
+	fmt.Println("username:", username)
+	fmt.Println("password:", password)
+	fmt.Println("redirectUri:", redirectUri)
+
+	userInfo, token, err := h.passwordAuthenticator.LoginByKubeSphere(username, password)
+	// 检查是否有错误
+	if err != nil {
+		fmt.Println("Error:", err)
+	} else {
+		fmt.Println("User Info:", userInfo)
+		fmt.Println("Token:", token)
+	}
+
+	redirectURL, err := url.Parse(redirectUri)
+	if err != nil {
+		api.HandleBadRequest(response, req, fmt.Errorf("invalid redirectURL: %s", err))
+		return
+	}
+	response.Header().Set("Content-Type", "text/plain")
+	http.Redirect(response, req.Request, redirectURL.String(), http.StatusFound)
+
+}

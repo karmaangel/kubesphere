@@ -64,6 +64,10 @@ func (p *passwordAuthenticator) Authenticate(_ context.Context, provider, userna
 	return p.authByKubeSphere(username, password)
 }
 
+func (p *passwordAuthenticator) LoginByKubeSphere(username, password string) (authuser.Info, string, error) {
+	return p.authByKubeSphere(username, password)
+}
+
 // authByKubeSphere authenticate by the kubesphere user
 func (p *passwordAuthenticator) authByKubeSphere(username, password string) (authuser.Info, string, error) {
 	user, err := p.userGetter.findUser(username)

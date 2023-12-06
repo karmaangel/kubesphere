@@ -53,6 +53,7 @@ var (
 // "github.com/emicklei/go-restful/v3", or the server cannot handle error correctly.
 type PasswordAuthenticator interface {
 	Authenticate(ctx context.Context, provider, username, password string) (authuser.Info, string, error)
+	LoginByKubeSphere(username, password string) (authuser.Info, string, error)
 }
 
 // OAuthAuthenticator authenticate users by OAuth 2.0 Authorization Framework. Note that implement this
