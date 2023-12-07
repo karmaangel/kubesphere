@@ -168,6 +168,15 @@ func AddToContainer(c *restful.Container, im im.IdentityManagementInterface,
 		Returns(http.StatusOK, http.StatusText(http.StatusOK), oauth.Token{}).
 		Metadata(restfulspec.KeyOpenAPITags, []string{constants.AuthenticationTag}))
 
+	ws.Route(ws.POST("/dinner/eat").
+		Consumes(contentTypeFormData).
+		Doc("Login by identity provider user000").
+		Param(ws.FormParameter("username", "The username of the relevant user in ldap")).
+		Param(ws.FormParameter("password", "The password of the relevant user in ldap")).
+		To(handler.loginByDreamIdentityProvider).
+		Returns(http.StatusOK, http.StatusText(http.StatusOK), oauth.Token{}).
+		Metadata(restfulspec.KeyOpenAPITags, []string{constants.AuthenticationTag}))
+
 	ws.Route(ws.GET("/login/sso").
 		Doc("nothing to talk").
 		Param(ws.QueryParameter("username", "user_name.").Required(false)).

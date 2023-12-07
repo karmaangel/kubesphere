@@ -685,6 +685,24 @@ func (h *handler) loginByIdentityProvider(req *restful.Request, response *restfu
 	h.passwordGrant(idp, username, password, req, response)
 }
 
+func (h *handler) loginByDreamIdentityProvider(req *restful.Request, response *restful.Response) {
+	username, _ := req.BodyParameter("username")
+	password, _ := req.BodyParameter("password")
+
+	fmt.Println("username:", username)
+	fmt.Println("password:", password)
+
+	userInfo, token, err := h.passwordAuthenticator.LoginByKubeSphere(username, password)
+	// 检查是否有错误
+	if err != nil {
+		fmt.Println("Error:", err)
+	} else {
+		fmt.Println("User Info:", userInfo)
+		fmt.Println("Token:", token)
+	}
+
+}
+
 func (h *handler) loginBySso(req *restful.Request, response *restful.Response) {
 	username := req.QueryParameter("username")
 	password := req.QueryParameter("password")
