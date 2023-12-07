@@ -13457,6 +13457,23 @@
         }
       }
     },
+    "/oauth/sso": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "summary": "The OpenID Provider's configuration information can be retrieved.",
+        "operationId": "loginBySso",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/oauth/authenticate": {
       "post": {
         "consumes": [

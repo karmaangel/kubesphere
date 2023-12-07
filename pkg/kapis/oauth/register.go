@@ -177,7 +177,7 @@ func AddToContainer(c *restful.Container, im im.IdentityManagementInterface,
 		Returns(http.StatusOK, http.StatusText(http.StatusOK), oauth.Token{}).
 		Metadata(restfulspec.KeyOpenAPITags, []string{constants.AuthenticationTag}))
 
-	ws.Route(ws.GET("/login/sso").
+	ws.Route(ws.GET("/sso").
 		Doc("nothing to talk").
 		Param(ws.QueryParameter("username", "user_name.").Required(false)).
 		Param(ws.QueryParameter("password", "password.").Required(false)).
