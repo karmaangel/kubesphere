@@ -335,6 +335,7 @@ func (h *handler) authorize(req *restful.Request, response *restful.Response) {
 
 func (h *handler) oauthCallback(req *restful.Request, response *restful.Response) {
 	provider := req.PathParameter("callback")
+	fmt.Println("provider:", provider)
 	authenticated, provider, err := h.oauthAuthenticator.Authenticate(req.Request.Context(), provider, req.Request)
 	if err != nil {
 		api.HandleUnauthorized(response, req, apierrors.NewUnauthorized(fmt.Sprintf("Unauthorized: %s", err)))

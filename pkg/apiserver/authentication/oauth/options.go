@@ -18,6 +18,7 @@ package oauth
 
 import (
 	"errors"
+	"fmt"
 	"net/url"
 	"time"
 
@@ -187,6 +188,9 @@ func (o *Options) OAuthClient(name string) (Client, error) {
 }
 
 func (o *Options) IdentityProviderOptions(name string) (*IdentityProviderOptions, error) {
+	fmt.Println("name:", name)
+	fmt.Println(o.IdentityProviders)
+	fmt.Println("name:", o.IdentityProviders)
 	for _, found := range o.IdentityProviders {
 		if found.Name == name {
 			return &found, nil
