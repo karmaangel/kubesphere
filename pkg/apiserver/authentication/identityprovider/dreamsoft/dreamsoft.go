@@ -44,5 +44,6 @@ func (f dreamsoftProviderFactory) Create(opts options.DynamicOptions) (identityp
 }
 
 func (c dreamsoft) IdentityExchangeCallback(req *http.Request) (identityprovider.Identity, error) {
-	return &dreamsoftIdentity{User: "admin"}, nil
+	uid := req.URL.Query().Get("uid")
+	return &dreamsoftIdentity{User: uid}, nil
 }
